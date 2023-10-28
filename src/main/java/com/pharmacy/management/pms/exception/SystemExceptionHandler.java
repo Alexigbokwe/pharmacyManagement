@@ -9,6 +9,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.pharmacy.management.pms.utils.ErrorResponse;
 
@@ -46,5 +48,15 @@ public class SystemExceptionHandler {
         });
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = { AuthorizationException.class })
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseBody
+    public ResponseEntity<Object> handleMissingAuthorizationHeader(
+            AuthorizationException authorizationException) {
+        ErrorResponse<Throwable> errorResponse = new ErrorResponse<>(authorizationException.getMessage(),
+                authorizationException.getStatusCode(), authorizationException.getCause());
+        return new ResponseEntity<>(errorResponse, errorResponse.getStatusCode());
     }
 }

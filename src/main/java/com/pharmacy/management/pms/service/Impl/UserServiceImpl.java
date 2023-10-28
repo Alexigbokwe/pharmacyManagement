@@ -1,5 +1,7 @@
 package com.pharmacy.management.pms.service.Impl;
 
+import static com.pharmacy.management.pms.configuration.Role.ADMIN;
+
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -8,9 +10,11 @@ import com.pharmacy.management.pms.configuration.Role;
 import com.pharmacy.management.pms.configuration.UserStatus;
 import com.pharmacy.management.pms.dto.LoginDto;
 import com.pharmacy.management.pms.dto.RegisterPharmacistDto;
+import com.pharmacy.management.pms.dto.UpdatePharmacistDto;
 import com.pharmacy.management.pms.dto.UserDto;
 import com.pharmacy.management.pms.entities.Token;
 import com.pharmacy.management.pms.entities.User;
+import com.pharmacy.management.pms.exception.AuthorizationException;
 import com.pharmacy.management.pms.exception.BadRequestException;
 import com.pharmacy.management.pms.exception.ResourceAlreadyExistException;
 import com.pharmacy.management.pms.exception.ResourceNotFoundException;
@@ -67,25 +71,37 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updatePharmacistStatus(Integer id, String status) {
-        Optional<User> user = this.userRepository.findById(id);
-        if (!user.isPresent()) {
+        User user = this.userRepository.findById(id).orElse(null);
+        if (user == null) {
             throw new ResourceNotFoundException("User does not exist");
         }
+        if (!user.getRole().equals(ADMIN)) {
+            throw new AuthorizationException();
+        }
         if (UserStatus.active.equalsIgnoreCase(status) || UserStatus.inactive.equalsIgnoreCase(status)) {
-            user.get().setStatus(status);
-            this.userRepository.save(user.get());
+            user.setStatus(status);
+            this.userRepository.save(user);
             return;
         }
         throw new BadRequestException("Invalid status provided");
     }
 
     @Override
-    public UserDto updatePharmacist(Integer id, UserDto userDto) {
-        Boolean user = this.userRepository.findById(id).isPresent();
-        if (!user) {
+    public UserDto updatePharmacist(Integer id, UpdatePharmacistDto userDto) {
+        User user = this.userRepository.findById(id).orElse(null);
+        if (user == null) {
             throw new ResourceNotFoundException("User does not exist");
         }
-        User savedUser = this.userRepository.save(UserDataMapper.mapToUser(userDto));
+
+        if (user.getStatus().equals(UserStatus.inactive)) {
+            throw new AuthorizationException();
+        }
+
+        user.setFirstname(userDto.getFirstName());
+        user.setLastname(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        user.setPhoneNumber(userDto.getPhoneNumber());
+        User savedUser = this.userRepository.save(user);
         return UserDataMapper.mapToUserDto(savedUser);
     }
 

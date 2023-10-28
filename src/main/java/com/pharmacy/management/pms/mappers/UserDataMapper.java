@@ -1,6 +1,7 @@
 package com.pharmacy.management.pms.mappers;
 
 import com.pharmacy.management.pms.dto.RegisterPharmacistDto;
+import com.pharmacy.management.pms.dto.UpdatePharmacistDto;
 import com.pharmacy.management.pms.dto.UserDto;
 import com.pharmacy.management.pms.entities.User;
 
@@ -32,6 +33,15 @@ public class UserDataMapper {
                 .status(pharmacist.getStatus())
                 .role(pharmacist.getRole())
                 .password(pharmacist.getPassword())
+                .build();
+    }
+
+    public static User mapToUser(UpdatePharmacistDto pharmacist) {
+        return User.builder().id(pharmacist.getId())
+                .firstname(pharmacist.getFirstName())
+                .lastname(pharmacist.getLastName())
+                .email(pharmacist.getEmail())
+                .phoneNumber(pharmacist.getPhoneNumber())
                 .build();
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pharmacy.management.pms.dto.UpdatePharmacistDto;
 import com.pharmacy.management.pms.dto.UserDto;
 import com.pharmacy.management.pms.dto.UserStatusDto;
 import com.pharmacy.management.pms.service.UserService;
@@ -31,7 +32,8 @@ public class PharmacistController extends BaseController {
 
     @PutMapping("/update_pharmacist/{id}")
     public ResponseEntity<SuccessResponse<UserDto>> updatePharmacist(@PathVariable("id") Integer id,
-            @RequestBody UserDto pharmacist) {
+            @RequestBody UpdatePharmacistDto pharmacist) {
+        System.out.println(pharmacist.toString());
         UserDto updatedPharmacist = this.userService.updatePharmacist(id, pharmacist);
         return ResponseEntity
                 .ok(this.successResponse("Pharmacist successfully updated", updatedPharmacist));
