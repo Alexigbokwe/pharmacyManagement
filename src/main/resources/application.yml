@@ -1,13 +1,13 @@
 spring:
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/pharmacy_management_db
+    url: jdbc:postgresql://127.0.0.1:5444/pharmacy_management_db
     username: postgres
     password:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
-    show-sql: false
+      ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
