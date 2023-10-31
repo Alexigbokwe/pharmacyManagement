@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 public class UpdateGroupDto {
-    @NotNull
+    @NotNull(message = "Group id is required")
     private Integer id;
 
     @NotBlank(message = "Group name is required")

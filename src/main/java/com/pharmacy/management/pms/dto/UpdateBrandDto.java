@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 public class UpdateBrandDto {
-    @NotNull
+    @NotNull(message = "Brand id is required")
     private Integer id;
 
     @NotBlank(message = "Brand name is required")

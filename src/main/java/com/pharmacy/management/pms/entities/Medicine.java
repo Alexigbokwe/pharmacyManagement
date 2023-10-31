@@ -38,12 +38,6 @@ public class Medicine extends BaseEntity {
     @Column(name = "quantity_in_stock")
     private int quantityInStock;
 
-    @Column(name = "minimum_stock_level")
-    private int minimumStockLevel;
-
-    @Column(name = "maximum_stock_level")
-    private int maximumStockLevel;
-
     @Column(name = "manufactured_date", nullable = true)
     private Date manufacturedDate;
 
