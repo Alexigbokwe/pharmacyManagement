@@ -36,7 +36,7 @@ public class MedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public MedicineDto updateBrand(UpdateMedicineDto reqMedicine) {
+    public MedicineDto updateMedicine(UpdateMedicineDto reqMedicine) {
 
         if (!this.doesMedicineExistById(reqMedicine.getId())) {
             throw new ResourceNotFoundException("Medicine not found");

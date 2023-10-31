@@ -8,7 +8,7 @@ import com.pharmacy.management.pms.dto.UpdateMedicineDto;
 public interface MedicineService {
     MedicineDto createMedicine(MedicineDto medicineDto);
 
-    MedicineDto updateBrand(UpdateMedicineDto reqMedicine);
+    MedicineDto updateMedicine(UpdateMedicineDto reqMedicine);
 
     List<MedicineDto> getAllMedicines();
 

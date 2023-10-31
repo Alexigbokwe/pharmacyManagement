@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/groups")
+@RequestMapping("/api/v1/groups")
 public class GroupController extends BaseController {
     private GroupService groupService;
 

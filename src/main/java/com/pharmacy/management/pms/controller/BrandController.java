@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/brands")
+@RequestMapping("/api/v1/brands")
 public class BrandController extends BaseController {
     private BrandService brandService;
 
