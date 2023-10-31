@@ -13,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MedicineDto {
+    private Integer id;
     @NotBlank(message = "Medicine name is required")
     private String name;
 
