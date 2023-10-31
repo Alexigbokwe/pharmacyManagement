@@ -51,8 +51,8 @@ public class Medicine extends BaseEntity {
     private Date expirationDate;
 
     @ManyToOne
-    @JoinColumn(name = "group_id")
-    private Group group;
+    @JoinColumn(name = "medicine_group_id")
+    private MedicineGroup medicine_group;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")

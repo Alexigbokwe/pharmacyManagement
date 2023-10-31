@@ -14,7 +14,10 @@ import com.pharmacy.management.pms.mappers.BrandDataMapper;
 import com.pharmacy.management.pms.repository.BrandRepository;
 import com.pharmacy.management.pms.service.BrandService;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class BrandServiceImpl implements BrandService {
     private BrandRepository brandRepository;
 

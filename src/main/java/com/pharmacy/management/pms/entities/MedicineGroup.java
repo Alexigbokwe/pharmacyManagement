@@ -14,11 +14,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "group")
-public class Group extends BaseEntity {
+@Table(name = "medicine_group")
+public class MedicineGroup extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "medicine_group")
     private List<Medicine> medicines;
 }
