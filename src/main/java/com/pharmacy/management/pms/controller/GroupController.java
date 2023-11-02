@@ -3,6 +3,7 @@ package com.pharmacy.management.pms.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,24 +27,28 @@ import lombok.AllArgsConstructor;
 public class GroupController extends BaseController {
     private GroupService groupService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/all")
     public ResponseEntity<SuccessResponse<List<GroupDto>>> getAllMedicineGroups() {
         List<GroupDto> medicineGroups = this.groupService.getAllGroups();
         return ResponseEntity.ok(this.successResponse("Medicine Groups successfully fetched", medicineGroups));
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("{id}")
     public ResponseEntity<SuccessResponse<GroupDto>> getMedicineGroup(@PathVariable("id") Integer medicineGroupId) {
         GroupDto medicineGroup = this.groupService.getGroup(medicineGroupId);
         return ResponseEntity.ok(this.successResponse("Medicine Group successfully fetched", medicineGroup));
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public ResponseEntity<SuccessResponse<GroupDto>> saveMedicineGroup(@Valid @RequestBody GroupDto medicineGroup) {
         GroupDto createdGroup = this.groupService.createGroup(medicineGroup);
         return ResponseEntity.ok(this.successResponse("Medicine Group successfully created", createdGroup));
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PatchMapping
     public ResponseEntity<SuccessResponse<GroupDto>> updateMedicineGroup(
             @Valid @RequestBody UpdateGroupDto medicineGroup) {
@@ -51,6 +56,7 @@ public class GroupController extends BaseController {
         return ResponseEntity.ok(this.successResponse("Medicine Group successfully updated", updatedGroup));
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("{id}")
     public ResponseEntity<SuccessResponse<String>> deleteMedicineGroup(@PathVariable("id") Integer medicineGroupId) {
         this.groupService.deleteGroup(medicineGroupId);

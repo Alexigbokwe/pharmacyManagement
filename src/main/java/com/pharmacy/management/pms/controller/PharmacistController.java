@@ -1,6 +1,7 @@
 package com.pharmacy.management.pms.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,7 @@ import lombok.AllArgsConstructor;
 public class PharmacistController extends BaseController {
     private UserService userService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/update_pharmacist_status/{id}")
     public ResponseEntity<SuccessResponse<String>> updatePharmacistStatus(@PathVariable("id") Integer id,
             @Valid @RequestBody UserStatusDto status) {
@@ -30,6 +32,7 @@ public class PharmacistController extends BaseController {
                 .ok(this.successResponse("Status successfully updated", null));
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/update_pharmacist/{id}")
     public ResponseEntity<SuccessResponse<UserDto>> updatePharmacist(@PathVariable("id") Integer id,
             @RequestBody UpdatePharmacistDto pharmacist) {
